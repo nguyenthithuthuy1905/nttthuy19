@@ -1,6 +1,7 @@
 # Hugo build output
 /public/
-/resources/_gen/
+/resources/
+/hugo_stats.json
 
 # Hugo modules
 hugo_stats.json
