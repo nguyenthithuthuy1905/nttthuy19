@@ -1,1 +1,3 @@
-baseURL = 'https://nguyenthithuthuy1905.github.io/blog/'
+baseURL = 'https://nguyenthithuthuy1905.github.io/nttthuy19/'
+canonifyURLs = true
+relativeURLs = false
