@@ -1,0 +1,37 @@
+theme = "ananke"
+baseURL = 'http://localhost:1313/'
+languageCode = 'vi'
+title = 'Blog Lập Trình Mạng'
+description = 'Chia sẻ kiến thức về lập trình mạng, Java và JavaScript'
+copyright = '© 2024 Blog Lập Trình Mạng'
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[params]
+  author = "Tên của bạn"
+  description = "Blog chia sẻ kiến thức về lập trình mạng, Java và JavaScript"
+  keywords = ["lập trình mạng", "java", "javascript", "networking", "programming"]
+  showPageNumbers = true
+  showReadingTime = true
+  showWordCount = true
+  showPostNav = true
+  
+[menu]
+
+  [[menu.main]]
+  name = "Trang Chủ"
+  url = "/"
+  weight = 1
+
+  [[menu.main]]
+  name = "Blog"
+  url = "/posts/"
+  weight = 2
+
+  [[menu.main]]
+  name = "Giới Thiệu"
+  url = "/profile/"
+  weight = 3

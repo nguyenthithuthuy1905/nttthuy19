@@ -1,0 +1,213 @@
+<header class="site-header">
+  <div class="header-container">
+    <!-- Logo Section -->
+    <div class="header-brand">
+      <a href="/" class="brand-link">
+        <div class="brand-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+            <path d="M8 12h16v2H8v-2zm0 4h16v2H8v-2zm0 4h12v2H8v-2z" fill="white"/>
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:var(--primary);stop-opacity:1" />
+                <stop offset="100%" style="stop-color:var(--primary-light);stop-opacity:1" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">{{ .Site.Title }}</span>
+          <span class="brand-subtitle">Frontend Developer</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="header-nav">
+      <ul class="nav-list">
+        {{ range .Site.Menus.main }}
+        <li class="nav-item">
+          <a href="{{ .URL }}" class="nav-link">{{ .Name }}</a>
+        </li>
+        {{ end }}
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <!-- Search Button -->
+      <button id="open-search" class="action-btn search-btn" title="Tìm kiếm">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+      </button>
+
+      <!-- Dark Mode Toggle -->
+      <button id="dark-mode-toggle" class="action-btn theme-btn" title="Chế độ tối/sáng">
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+      </button>
+
+      <!-- Theme Selector -->
+      <div class="theme-selector">
+        <label for="theme-select" class="theme-label">Theme</label>
+        <select id="theme-select" class="theme-select" aria-label="Chọn theme">
+          <option value="default">Default</option>
+          <option value="sakura">Sakura</option>
+          <option value="lavender">Lavender</option>
+          <option value="mint">Mint</option>
+          <option value="sunset">Sunset</option>
+          <option value="summer-ducks">Summer</option>
+        </select>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <button id="mobile-menu-toggle" class="action-btn mobile-toggle" title="Menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <nav id="mobile-nav" class="mobile-nav">
+    <ul class="mobile-nav-list">
+      {{ range .Site.Menus.main }}
+      <li class="mobile-nav-item">
+        <a href="{{ .URL }}" class="mobile-nav-link">{{ .Name }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </nav>
+  <!-- extra fixed side icons layer for summer theme -->
+  <div class="summer-side-icons"></div>
+  <div id="quick-search" style="display:none; position: fixed; top: 72px; right: 24px; width: min(520px, calc(100% - 48px)); background: rgba(0,0,0,0.45); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.25); border-radius: 14px; box-shadow: 0 18px 48px rgba(0,0,0,.35); padding: 12px; z-index: 1200;">
+    <input id="quick-search-input" type="search" placeholder="Gõ để tìm bài viết..." style="width:100%; padding:10px 12px; border-radius:10px; border:1px solid rgba(255,255,255,.35); background: rgba(0,0,0,.35); color:#fff;" />
+    <ul id="quick-search-result" style="list-style:none; margin:10px 0 0; padding:0; max-height:300px; overflow:auto;"></ul>
+  </div>
+  <script>
+    (function(){
+      const sel = document.getElementById('theme-select');
+      const saved = localStorage.getItem('theme-choice') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+      if (sel) sel.value = saved;
+      sel && sel.addEventListener('change', function(){
+        const v = this.value;
+        document.documentElement.setAttribute('data-theme', v);
+        localStorage.setItem('theme-choice', v);
+      });
+      // Force dropdown option colors (some browsers ignore CSS in external file here)
+      Array.from(sel.options).forEach(op => { op.style.color = '#1f2937'; op.style.background = '#ffffff'; });
+
+      // Quick search (client-side)
+      const openBtn = document.getElementById('open-search');
+      const panel = document.getElementById('quick-search');
+      const input = document.getElementById('quick-search-input');
+      const list = document.getElementById('quick-search-result');
+      {{- $arr := slice -}}
+      {{- range (where .Site.RegularPages "Type" "posts") -}}
+        {{- $arr = $arr | append (dict "title" .Title "url" .RelPermalink) -}}
+      {{- end -}}
+      const pages = {{ $arr | jsonify }};
+      function render(q){
+        const qq = (q||'').toLowerCase();
+        if(qq.length < 2){ list.innerHTML = ''; return; }
+        const items = pages.filter(p=>p.title.toLowerCase().includes(qq)).slice(0,10);
+        list.innerHTML = items.map(p=>`<li><a href="${p.url}" style="display:block; padding:8px 10px; color:#fff; border-radius:8px;">${p.title}</a></li>`).join('');
+      }
+      openBtn && openBtn.addEventListener('click', function(e){ e.preventDefault(); if(panel.style.display!=='block'){ panel.style.display='block'; input.value=''; list.innerHTML=''; input.focus(); } else { panel.style.display='none'; }});
+      input && input.addEventListener('input', e=> render(e.target.value));
+      document.addEventListener('keydown', (ev)=>{ if(ev.key==='Escape'){ panel.style.display='none'; }});
+
+      // Dark mode toggle with SVG icons
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      const moonIcon = darkModeToggle?.querySelector('.moon-icon');
+      const sunIcon = darkModeToggle?.querySelector('.sun-icon');
+      const savedDarkMode = localStorage.getItem('dark-mode') === 'true';
+      
+      if (savedDarkMode) {
+        document.documentElement.classList.add('dark-mode');
+        if (moonIcon) moonIcon.style.display = 'none';
+        if (sunIcon) sunIcon.style.display = 'block';
+      }
+      
+      darkModeToggle && darkModeToggle.addEventListener('click', function(){
+        const isDark = document.documentElement.classList.toggle('dark-mode');
+        if (moonIcon) moonIcon.style.display = isDark ? 'none' : 'block';
+        if (sunIcon) sunIcon.style.display = isDark ? 'block' : 'none';
+        localStorage.setItem('dark-mode', isDark);
+      });
+
+      // Mobile menu toggle
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const mobileNav = document.getElementById('mobile-nav');
+      
+      mobileMenuToggle && mobileMenuToggle.addEventListener('click', function() {
+        mobileNav.classList.toggle('active');
+        this.classList.toggle('active');
+      });
+
+      // Close mobile menu when clicking on links
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!mobileMenuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+          mobileNav.classList.remove('active');
+          mobileMenuToggle.classList.remove('active');
+        }
+      });
+
+      // Enhanced hover effects for navigation
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-2px)';
+          this.style.textShadow = '0 2px 8px rgba(255,255,255,0.3)';
+        });
+        link.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+          this.style.textShadow = 'none';
+        });
+      });
+
+      // Header scroll effect
+      let lastScrollTop = 0;
+      const header = document.querySelector('.site-header');
+      
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+          // Scrolling down
+          header.style.transform = 'translateY(-100%)';
+        } else {
+          // Scrolling up
+          header.style.transform = 'translateY(0)';
+        }
+        
+        lastScrollTop = scrollTop;
+      });
+    })();
+  </script>
+</header>

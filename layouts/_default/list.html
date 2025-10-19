@@ -1,0 +1,68 @@
+{{ define "main" }}
+<div class="main-content">
+  <header class="glass-container" style="text-align: center; margin-bottom: 2rem;">
+    <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+      {{ .Title }}
+    </h1>
+    {{ if .Content }}
+    <div style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; line-height: 1.8;">
+      {{ .Content }}
+    </div>
+    {{ end }}
+  </header>
+
+  <section style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
+    {{ range .Pages }}
+    <article class="post-card" style="display: flex; gap: 1rem; align-items: stretch;">
+      <div class="post-card-media" style="flex: 0 0 240px; max-width: 240px;">
+        {{ $img := .Params.featured_image }}
+        {{ if not $img }}
+          {{ if in .Params.tags "java" }}
+            {{ $img = "/images/java.svg" }}
+          {{ else if or (in .Params.tags "javascript") (in .Params.tags "js") }}
+            {{ $img = "/images/javascript.svg" }}
+          {{ else }}
+            {{ $img = "/images/tech.svg" }}
+          {{ end }}
+        {{ end }}
+        {{ if $img }}
+          <img src="{{ $img | relURL }}" alt="{{ $.Title }}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(255,255,255,.18);">
+        {{ else }}
+          <div class="post-card-placeholder" style="width: 100%; height: 160px; border-radius: 12px; background: linear-gradient(135deg, rgba(255,255,255,.12), rgba(255,255,255,.06)); border: 1px solid rgba(255,255,255,.18);"></div>
+        {{ end }}
+      </div>
+      <div class="post-card-content" style="display: flex; flex-direction: column; gap: .5rem; flex: 1 1 auto;">
+        <h2 style="margin: 0 0 .25rem 0;">
+          <a href="{{ .Permalink }}" style="color: white; text-decoration: none;">
+            {{ .Title }}
+          </a>
+        </h2>
+        <p style="color: rgba(255, 255, 255, 0.9); margin: 0;">
+          {{ if .Params.description }}
+            {{ .Params.description }}
+          {{ else }}
+            {{ .Summary | truncate 180 }}
+          {{ end }}
+        </p>
+        <div style="display:flex; gap:.75rem; flex-wrap: wrap; margin-top: .25rem;">
+          {{ range .Params.tags }}<span class="tag">{{ . }}</span>{{ end }}
+        </div>
+        <div style="display: flex; gap: 1rem; align-items: center; color: rgba(255,255,255,.75); margin-top: auto;">
+          <span>📅 {{ .Date.Format "2 Jan 2006" }}</span>
+          <span>📖 {{ .ReadingTime }} phút</span>
+          <a href="{{ .Permalink }}" class="btn" style="margin-left: auto;">Đọc bài</a>
+        </div>
+      </div>
+    </article>
+    {{ end }}
+  </section>
+
+  {{ if gt (len .Pages) 0 }}
+  <div style="text-align: center; margin-top: 3rem;">
+    <a href="/" class="btn">← Về Trang Chủ</a>
+  </div>
+  {{ end }}
+</div>
+{{ end }}
+
+

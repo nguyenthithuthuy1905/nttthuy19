@@ -1,0 +1,5 @@
+<!-- Placeholder for profile photo -->
+<!-- Please replace this with your actual profile photo -->
+<!-- Recommended size: 400x400px or larger -->
+<!-- Format: JPG, PNG, or WebP -->
+<!-- Place the image file in: blog/static/images/profile-photo.jpg -->

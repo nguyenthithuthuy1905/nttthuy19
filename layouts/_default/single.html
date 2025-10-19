@@ -1,0 +1,44 @@
+{{ define "main" }}
+<div class="main-content">
+  <a class="btn-back" href="javascript:history.back()" aria-label="Trở về">← Trở về</a>
+  <article class="post-card">
+    <header style="margin-bottom: 2rem;">
+      <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);">
+        {{ .Title }}
+      </h1>
+      <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
+        <span style="color: rgba(255, 255, 255, 0.8);">📅 {{ .Date.Format "2 January 2006" }}</span>
+        {{ if .Params.tags }}
+        <div>
+          {{ range .Params.tags }}
+          <span class="tag">{{ . }}</span>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ if .Params.description }}
+      <p style="color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; font-style: italic; margin-bottom: 2rem;">
+        {{ .Params.description }}
+      </p>
+      {{ end }}
+    </header>
+
+    <div class="content" style="color: rgba(255, 255, 255, 0.9); line-height: 1.8;">
+      {{ .Content }}
+    </div>
+
+    <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div>
+          <a href="/posts/" class="btn">← Quay Lại Blog</a>
+        </div>
+        <div style="color: rgba(255, 255, 255, 0.7);">
+          <span>📖 {{ .ReadingTime }} phút đọc</span>
+        </div>
+      </div>
+    </footer>
+  </article>
+</div>
+{{ end }}
+
+
