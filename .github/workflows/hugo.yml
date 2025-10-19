@@ -25,10 +25,13 @@ jobs:
     steps:
       - name: Install Hugo CLI
         run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.121.2/hugo_extended_0.121.2_linux-amd64.deb
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.115.4/hugo_extended_0.115.4_linux-amd64.deb
           sudo dpkg -i ${{ runner.temp }}/hugo.deb
       - name: Install Dart Sass
-        run: sudo snap install dart-sass
+        run: |
+          wget -O ${{ runner.temp }}/dart-sass.tar.gz https://github.com/sass/dart-sass/releases/download/1.69.5/dart-sass-1.69.5-linux-x64.tar.gz
+          tar -xzf ${{ runner.temp }}/dart-sass.tar.gz -C ${{ runner.temp }}/
+          sudo mv ${{ runner.temp }}/dart-sass/sass /usr/local/bin/
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -39,6 +42,10 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      - name: Setup Hugo
+        run: |
+          hugo mod get -u
+          hugo mod tidy
       - name: Build with Hugo
         env:
           HUGO_ENVIRONMENT: production

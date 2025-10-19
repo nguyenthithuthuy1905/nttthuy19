@@ -2,6 +2,9 @@
 /public/
 /resources/_gen/
 
+# Hugo modules
+hugo_stats.json
+
 # Node modules
 node_modules/
 
