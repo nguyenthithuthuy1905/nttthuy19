@@ -1,9 +1,5 @@
+theme = "ananke"
 baseURL = 'https://nguyenthithuthuy1905.github.io/blog/'
-
-[module]
-  [[module.imports]]
-    path = "github.com/theNewDynamic/gohugo-theme-ananke"
-    version = "v1.0.0"
 languageCode = 'vi'
 title = 'Blog Lập Trình Mạng'
 description = 'Chia sẻ kiến thức về lập trình mạng, Java và JavaScript'
