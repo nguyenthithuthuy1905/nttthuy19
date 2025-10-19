@@ -1,5 +1,5 @@
 theme = "ananke"
-baseURL = 'http://localhost:1313/'
+baseURL = 'https://nguyenthithuthuy1905.github.io/blog/'
 languageCode = 'vi'
 title = 'Blog Lập Trình Mạng'
 description = 'Chia sẻ kiến thức về lập trình mạng, Java và JavaScript'
