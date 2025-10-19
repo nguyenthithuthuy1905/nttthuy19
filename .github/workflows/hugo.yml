@@ -45,7 +45,7 @@ jobs:
       - name: Setup Hugo
         run: |
           hugo mod init
-          hugo mod get -u
+          hugo mod get -u github.com/theNewDynamic/gohugo-theme-ananke
           hugo mod tidy
       - name: Build with Hugo
         env:
