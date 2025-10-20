@@ -2,18 +2,66 @@
 title: "JavaScript Essentials - Advanced Functions & Closures"
 date: 2024-12-20T22:00:00+07:00
 draft: false
-tags: ["javascript", "functions", "closures", "advanced", "scope"]
+tags: ["javascript", "functions", "closures", "advanced", "scope", "functional-programming", "hoisting"]
 categories: ["JavaScript Essentials"]
-description: "Khám phá các khái niệm nâng cao về functions trong JavaScript: closures, hoisting, arrow functions và functional programming"
+description: "Hướng dẫn chi tiết về functions nâng cao trong JavaScript: closures, hoisting, arrow functions, functional programming và design patterns"
 ---
 
 # JavaScript Essentials - Advanced Functions & Closures
 
 ## 🎯 **Mục tiêu học tập**
-- Hiểu sâu về scope và closures trong JavaScript
-- Nắm vững arrow functions và functional programming
-- Thực hành với higher-order functions
-- Áp dụng closures trong thực tế
+- Hiểu sâu về scope và closures - nền tảng của JavaScript
+- Nắm vững arrow functions và functional programming paradigms
+- Thực hành với higher-order functions và callback patterns
+- Áp dụng closures trong thực tế: module pattern, currying, memoization
+- Xử lý các vấn đề thường gặp với function hoisting và binding
+
+## 📚 **Tổng quan về Functions trong JavaScript**
+
+### **Functions là gì và tại sao quan trọng?**
+Trong JavaScript, **Functions** là "first-class citizens" - có nghĩa là chúng có thể được:
+- Gán cho variables
+- Truyền như arguments
+- Return từ other functions
+- Tạo ra tại runtime
+- Có properties và methods riêng
+
+**Tại sao Functions quan trọng:**
+- **Code reusability**: Tái sử dụng logic nhiều lần
+- **Modularity**: Chia nhỏ code thành các phần độc lập
+- **Abstraction**: Ẩn đi complexity, chỉ expose interface
+- **Functional Programming**: Xây dựng applications bằng cách combine functions
+- **Event Handling**: Xử lý user interactions và async operations
+
+### **JavaScript Functions vs Functions trong ngôn ngữ khác**
+```javascript
+// JavaScript - Functions là objects
+function greet(name) {
+    return `Hello, ${name}!`;
+}
+
+// Functions có properties và methods
+console.log(greet.length); // 1 - số parameters
+console.log(greet.name); // "greet" - tên function
+console.log(greet.toString()); // "function greet(name) { ... }"
+
+// Có thể gán function cho variable
+const sayHello = greet;
+console.log(sayHello("World")); // "Hello, World!"
+
+// Có thể truyền function như parameter
+function processName(name, processor) {
+    return processor(name);
+}
+
+console.log(processName("JavaScript", greet)); // "Hello, JavaScript!"
+```
+
+**Đặc điểm độc đáo của JavaScript Functions:**
+- **Hoisting**: Function declarations được "nâng lên" đầu scope
+- **Closures**: Có thể "nhớ" variables từ outer scope
+- **Lexical Scoping**: Scope được xác định tại thời điểm viết code
+- **Dynamic**: Có thể tạo và modify functions tại runtime
 
 ## 📚 **1. Scope và Lexical Scoping**
 

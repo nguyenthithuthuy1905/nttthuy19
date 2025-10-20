@@ -2,18 +2,81 @@
 title: "JavaScript Essentials - Objects & Prototypes"
 date: 2024-12-20T23:00:00+07:00
 draft: false
-tags: ["javascript", "objects", "prototypes", "oop", "inheritance"]
+tags: ["javascript", "objects", "prototypes", "oop", "inheritance", "encapsulation", "polymorphism"]
 categories: ["JavaScript Essentials"]
-description: "Tìm hiểu sâu về Objects, Prototypes và Object-Oriented Programming trong JavaScript"
+description: "Hướng dẫn chi tiết về Objects và Prototypes trong JavaScript: từ cơ bản đến nâng cao, thực hành OOP patterns và design principles"
 ---
 
 # JavaScript Essentials - Objects & Prototypes
 
 ## 🎯 **Mục tiêu học tập**
-- Hiểu sâu về Objects trong JavaScript
-- Nắm vững Prototype chain và inheritance
-- Thực hành với Object methods và properties
-- Áp dụng OOP patterns trong JavaScript
+- Hiểu sâu về Objects và cách chúng hoạt động trong JavaScript
+- Nắm vững Prototype chain và inheritance mechanism
+- Thực hành với Object methods, properties và descriptors
+- Áp dụng OOP patterns và design principles trong JavaScript
+- Xử lý các vấn đề thường gặp với prototype-based inheritance
+
+## 📚 **Tổng quan về Object-Oriented Programming trong JavaScript**
+
+### **OOP là gì và tại sao quan trọng?**
+**Object-Oriented Programming (OOP)** là một paradigm lập trình dựa trên khái niệm "objects" - các entities có chứa data (properties) và code (methods). OOP giúp:
+
+- **Tổ chức code**: Nhóm các functionality liên quan lại với nhau
+- **Tái sử dụng**: Tạo ra các templates có thể dùng nhiều lần
+- **Bảo trì**: Dễ dàng sửa đổi và mở rộng code
+- **Mô phỏng thực tế**: Code phản ánh cách chúng ta nghĩ về thế giới
+
+### **JavaScript OOP vs Traditional OOP**
+```javascript
+// Traditional OOP (Java, C#)
+class Person {
+    private String name;
+    private int age;
+    
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    public void greet() {
+        System.out.println("Hello, I'm " + this.name);
+    }
+}
+
+// JavaScript OOP - Prototype-based
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function() {
+    return `Hello, I'm ${this.name}`;
+};
+
+// Hoặc ES6 Classes (syntactic sugar)
+class Person {
+    constructor(name, age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    greet() {
+        return `Hello, I'm ${this.name}`;
+    }
+}
+```
+
+**Sự khác biệt chính:**
+- **JavaScript**: Prototype-based inheritance
+- **Traditional OOP**: Class-based inheritance
+- **JavaScript**: Dynamic typing, flexible structure
+- **Traditional OOP**: Static typing, rigid structure
+
+### **Tại sao JavaScript sử dụng Prototypes?**
+1. **Flexibility**: Có thể thay đổi object structure tại runtime
+2. **Memory efficiency**: Methods được chia sẻ qua prototype chain
+3. **Dynamic nature**: Phù hợp với nature của JavaScript
+4. **Simplicity**: Không cần complex class hierarchies
 
 ## 📦 **1. Objects - Cơ bản**
 
