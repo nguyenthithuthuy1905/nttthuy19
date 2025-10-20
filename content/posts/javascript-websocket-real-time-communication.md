@@ -1,6 +1,6 @@
 ---
 title: "Tạo ứng dụng real-time với WebSocket"
-date: 2025-10-1T14:00:00+07:00
+date: 2025-10-01T14:00:00+07:00
 draft: false
 description: "Hướng dẫn chi tiết về WebSocket trong JavaScript, từ cơ bản đến xây dựng ứng dụng real-time hoàn chỉnh"
 tags: ["javascript", "websocket", "real-time", "nodejs", "communication"]
