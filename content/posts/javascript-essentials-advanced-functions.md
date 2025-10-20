@@ -1,6 +1,6 @@
 ---
 title: "JavaScript Essentials - Advanced Functions & Closures"
-date: 2024-12-20T22:00:00+07:00
+date: 2025-09-20T22:00:00+07:00
 draft: false
 tags: ["javascript", "functions", "closures", "advanced", "scope", "functional-programming", "hoisting"]
 categories: ["JavaScript Essentials"]

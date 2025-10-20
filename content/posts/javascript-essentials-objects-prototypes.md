@@ -1,6 +1,6 @@
 ---
 title: "JavaScript Essentials - Objects & Prototypes"
-date: 2024-12-20T23:00:00+07:00
+date: 2025-08-20T23:00:00+07:00
 draft: false
 tags: ["javascript", "objects", "prototypes", "oop", "inheritance", "encapsulation", "polymorphism"]
 categories: ["JavaScript Essentials"]

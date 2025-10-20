@@ -1,6 +1,6 @@
 ---
 title: "Hiểu sâu về Fetch API — nền tảng của mọi yêu cầu HTTP hiện đại"
-date: 2024-01-15T13:00:00+07:00
+date: 2025-09-15T13:00:00+07:00
 draft: false
 description: "Hướng dẫn chi tiết về Fetch API trong JavaScript, từ cơ bản đến nâng cao với ví dụ thực tế"
 tags: ["javascript", "fetch", "api", "http", "async", "network"]

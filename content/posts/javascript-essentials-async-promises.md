@@ -1,6 +1,6 @@
 ---
 title: "JavaScript Essentials - Async Programming & Promises"
-date: 2024-12-21T00:00:00+07:00
+date: 2025-08-21T00:00:00+07:00
 draft: false
 tags: ["javascript", "async", "promises", "async-await", "callbacks"]
 categories: ["JavaScript Essentials"]
