@@ -1809,6 +1809,84 @@ a:focus-visible,
   min-width: 200px;
 }
 
+
+#quick-search {
+  background: rgba(10, 12, 20, 0.86) !important; 
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: 0 12px 40px rgba(2,6,23,0.75), inset 0 1px 0 rgba(255,255,255,0.02) !important;
+  color: #fff !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+#quick-search-input {
+  width: 100% !important;
+  padding: 12px 14px !important;
+  border-radius: 10px !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  background: rgba(255,255,255,0.03) !important;
+  color: #fff !important;
+  font-size: 1rem !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+#quick-search-input::placeholder {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+#quick-search-input:focus {
+  border-color: rgba(99,102,241,0.9) !important; /* primary-ish focus */
+  box-shadow: 0 6px 20px rgba(99,102,241,0.08) !important;
+}
+
+#quick-search-result {
+  list-style: none;
+  margin: 12px 0 0 0 !important;
+  padding: 6px !important;
+  max-height: 320px !important;
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+#quick-search-result li {
+  margin: 6px 0 !important;
+  padding: 0 !important;
+  line-height: 1.35 !important;
+}
+
+#quick-search-result li a {
+  display: block !important;
+  padding: 10px 12px !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  border-radius: 8px !important;
+  transition: background .18s ease, transform .12s ease;
+  white-space: normal !important; /* allow wrapping */
+  word-wrap: break-word !important;
+}
+
+#quick-search-result li a:hover {
+  background: rgba(255,255,255,0.04) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Slight separator to help scanning */
+#quick-search-result li + li { padding-top: 2px; }
+
+/* Scrollbar styles for better contrast */
+#quick-search-result::-webkit-scrollbar { width: 10px; }
+#quick-search-result::-webkit-scrollbar-track { background: transparent; }
+#quick-search-result::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 8px; }
+#quick-search-result::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.14); }
+
+/* Dark mode overrides if needed */
+html.dark-mode #quick-search { background: rgba(6,8,12,0.9) !important; border-color: rgba(255,255,255,0.06) !important; }
+html.dark-mode #quick-search-input { background: rgba(255,255,255,0.02) !important; }
+
+/* Ensure the panel sits above any decorative overlays */
+#quick-search { z-index: 2200 !important; }
+
 .timeline-period {
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.9rem;

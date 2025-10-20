@@ -122,11 +122,24 @@
       {{- range (where .Site.RegularPages "Type" "posts") -}}
         {{- $arr = $arr | append (dict "title" .Title "url" .RelPermalink) -}}
       {{- end -}}
-      const pages = {{ $arr | jsonify }};
+      // Inject search data directly from Hugo into a JS variable.
+      // Use `let` so we can fallback to an empty array if something unexpected happens.
+  let searchPages = {{ printf "%s" ($arr | jsonify) | safeJS }};
+      if (!Array.isArray(searchPages)) {
+        console.error('searchPages JSON is not an array', searchPages);
+        searchPages = [];
+      }
+
       function render(q){
         const qq = (q||'').toLowerCase();
         if(qq.length < 2){ list.innerHTML = ''; return; }
-        const items = pages.filter(p=>p.title.toLowerCase().includes(qq)).slice(0,10);
+        // Guard: ensure searchPages is an array before using filter
+        if (!Array.isArray(searchPages)) {
+          console.error('searchPages is not an array', searchPages);
+          list.innerHTML = '<li style="color: #ff6b6b; padding: 8px 10px;">Lỗi: Dữ liệu tìm kiếm không hợp lệ</li>';
+          return;
+        }
+        const items = searchPages.filter(p=> (p.title||'').toLowerCase().includes(qq)).slice(0,10);
         list.innerHTML = items.map(p=>`<li><a href="${p.url}" style="display:block; padding:8px 10px; color:#fff; border-radius:8px;">${p.title}</a></li>`).join('');
       }
       openBtn && openBtn.addEventListener('click', function(e){ e.preventDefault(); if(panel.style.display!=='block'){ panel.style.display='block'; input.value=''; list.innerHTML=''; input.focus(); } else { panel.style.display='none'; }});
